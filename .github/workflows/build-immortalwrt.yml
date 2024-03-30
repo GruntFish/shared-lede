@@ -149,6 +149,7 @@ jobs:
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
+          rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb,luci-app-store}
           ./scripts/feeds install -a
 
       - name: Modify configuration
