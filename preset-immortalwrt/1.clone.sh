@@ -2,7 +2,7 @@
 
 # download base code
 CODE_DIR=_firmware_code
-CODE_URL=https://github.com/immortalwrt/immortalwrt.git
+CODE_URL=https://github.com/GruntFish/immortalwrt.git
 CODE_BRANCH=openwrt-23.05
 SWITCH_LATEST_TAG=false
 git clone --single-branch -b $CODE_BRANCH $CODE_URL $CODE_DIR
