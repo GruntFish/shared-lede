@@ -139,16 +139,16 @@ jobs:
           chmod +x $TRANSIT_PY
           $TRANSIT_PY
 
-      - name: Clone sources
+      - name: Clone sources Update feeds
         env:
           CLONE_SH: ${{ steps.prepare-deployment.outputs.clone_sh }}
         run: |
+          ./scripts/feeds update -a
           chmod +x $CLONE_SH
           $CLONE_SH
 
-      - name: Update feeds
+      - name: Install feeds
         run: |
-          ./scripts/feeds update -a
           rm -rf feeds/smallpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb,luci-app-store,adguardhome}
           ./scripts/feeds install -a
 
