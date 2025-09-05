@@ -150,31 +150,6 @@ jobs:
         run: |
           ./scripts/feeds update -a
           rm -rf feeds/smallpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb,luci-app-store,adguardhome}
-          rm -rf ./feeds/luci/applications/luci-app-smartdns
-          rm -rf ./feeds/packages/net/smartdns
-          git clone https://github.com/pymumu/openwrt-smartdns ./feeds/packages/net/smartdns
-          git clone https://github.com/pymumu/luci-app-smartdns ./feeds/luci/applications/luci-app-smartdns
-
-          cd ./feeds/packages
-          git init temp-repo
-          cd temp-repo
-          git remote add origin https://github.com/immortalwrt/packages.git
-          git config core.sparseCheckout true
-          echo "lang/rust/*" >> .git/info/sparse-checkout
-          git pull origin master
-          cp -r lang/rust ../
-          cd ..
-          rm -rf temp-repo
-
-          cd lang/rust
-          sed -i '/RUST_CONFIG_llvm_download-ci-llvm/!b;c\
-          RUST_CONFIG_llvm_download-ci-llvm := false' Makefile
-
-          grep -n "llvm_download-ci-llvm" Makefile
-
-          cd ../../..
-          ls -la ./feeds/packages/lang/rust/
-
           ./scripts/feeds update packages
           ./scripts/feeds install -a -p packages rust
 
