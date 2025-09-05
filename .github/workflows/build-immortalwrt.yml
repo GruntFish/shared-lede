@@ -139,17 +139,21 @@ jobs:
           chmod +x $TRANSIT_PY
           $TRANSIT_PY
 
-      - name: Clone sources Update feeds
+      - name: Clone sources
         env:
           CLONE_SH: ${{ steps.prepare-deployment.outputs.clone_sh }}
         run: |
-          ./scripts/feeds update -a
           chmod +x $CLONE_SH
           $CLONE_SH
 
-      - name: Install feeds
+      - name: Updata & Install feeds
         run: |
+          ./scripts/feeds update -a
           rm -rf feeds/smallpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb,luci-app-store,adguardhome}
+          rm -rf ./feeds/luci/applications/luci-app-smartdns
+          rm -rf ./feeds/packages/net/smartdns
+          git clone https://github.com/pymumu/openwrt-smartdns ./feeds/packages/net/smartdns
+          git clone https://github.com/pymumu/luci-app-smartdns ./feeds/luci/applications/luci-app-smartdns
           ./scripts/feeds install -a
 
       - name: Modify configuration
