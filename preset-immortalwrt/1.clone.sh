@@ -27,6 +27,13 @@ mkdir $SUPPLY_DIR && cd $SUPPLY_DIR
 
 git clone https://github.com/lwb1978/openwrt-gecoosac ./package/openwrt-gecoosac
 
+rm -rf ./feeds/luci/applications/luci-app-smartdns
+rm -rf ./feeds/packages/net/smartdns
+git clone https://github.com/pymumu/openwrt-smartdns smartdns ./feeds/packages/net/
+git clone https://github.com/pymumu/luci-app-smartdns ./feeds/luci/applications/
+
+本文来自折腾之路: https://www.bandwh.com/net/2415.html
+
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git pw-dependencies
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall.git && mv openwrt-passwall/luci-app-passwall ./ && rm -rf openwrt-passwall
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall2.git && mv openwrt-passwall2/luci-app-passwall2 ./ && rm -rf openwrt-passwall2
