@@ -8,7 +8,7 @@ sed -i 's/192.168.1.1/192.168.10.254/g' package/base-files/files/bin/config_gene
 sed -i 's/normal/dark/g' feeds/luci/applications/luci-app-argon-config/root/etc/config/argon
 
 #sed -i 's/0x2B2/0x312/g' target/linux/ramips/patches-4.14/102-mt7621-fix-cpu-clk-add-clkdev.patch
-
+sed -i 's/0x2B2/0x312/g' target/linux/ramips/patches-5.10/322-mt7621-fix-cpu-clk-add-clkdev.patch
 
 # replace geodata source
 #. $(dirname $0)/../extra-files/update-geodata.sh
