@@ -19,8 +19,8 @@ sed -i 's/luci-theme-bootstrap/luci-theme-infinityfreedom-ng/g' feeds/luci/colle
 sed -i 's/Bootstrap theme/infinityfreedom theme/g' feeds/luci/collections/luci/Makefile
 
 
-sed -i 's/0x2B2/0x312/g' target/linux/ramips/patches-5.4/102-mt7621-fix-cpu-clk-add-clkdev.patch
-#sed -i 's/0x2B2/0x312/g' target/linux/ramips/patches-5.10/322-mt7621-fix-cpu-clk-add-clkdev.patch
+#sed -i 's/0x2B2/0x312/g' target/linux/ramips/patches-5.4/102-mt7621-fix-cpu-clk-add-clkdev.patch
+sed -i 's/0x2B2/0x312/g' target/linux/ramips/patches-5.10/322-mt7621-fix-cpu-clk-add-clkdev.patch
 
 # replace geodata source
 #. $(dirname $0)/../extra-files/update-geodata.sh
