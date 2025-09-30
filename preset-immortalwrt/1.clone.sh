@@ -32,7 +32,6 @@ git clone https://github.com/rufengsuixing/luci-app-adguardhome ./package/luci-a
 
 git clone https://github.com/nikkinikki-org/OpenWrt-momo.git && mv OpenWrt-momo/momo ./package && mv OpenWrt-momo/luci-app-momo ./package && rm -rf openwrt-momo
 
-wget -O - https://github.com/nikkinikki-org/OpenWrt-momo/raw/refs/heads/main/feed.sh | ash
 
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git pw-dependencies
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall.git && mv openwrt-passwall/luci-app-passwall ./ && rm -rf openwrt-passwall
