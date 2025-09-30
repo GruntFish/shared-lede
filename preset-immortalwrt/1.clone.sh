@@ -28,8 +28,9 @@ echo "src-link supply $PWD/$SUPPLY_DIR" >> feeds.conf.default
 mkdir $SUPPLY_DIR && cd $SUPPLY_DIR
 
 git clone https://github.com/lwb1978/openwrt-gecoosac ./package/openwrt-gecoosac
-git clone https://github.com/nikkinikki-org/OpenWrt-momo ./package/OpenWrt-momo
 git clone https://github.com/rufengsuixing/luci-app-adguardhome ./package/luci-app-adguardhome
+
+git clone https://github.com/nikkinikki-org/OpenWrt-momo.git && mv OpenWrt-momo/momo ./package && mv OpenWrt-momo/luci-app-momo ./package && rm -rf openwrt-momo
 
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git pw-dependencies
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall.git && mv openwrt-passwall/luci-app-passwall ./ && rm -rf openwrt-passwall
