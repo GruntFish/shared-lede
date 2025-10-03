@@ -4,8 +4,10 @@
 CODE_DIR=_firmware_code
 #CODE_URL=https://github.com/GruntFish/immortalwrt.git
 #CODE_BRANCH=openwrt-21.02
-CODE_URL=https://github.com/GruntFish/immortalwrt-5.10.git
+CODE_URL=https://github.com/GruntFish/lede.git
 CODE_BRANCH=master
+#CODE_URL=https://github.com/GruntFish/immortalwrt-5.10.git
+#CODE_BRANCH=master
 SWITCH_LATEST_TAG=false
 git clone --single-branch -b $CODE_BRANCH $CODE_URL $CODE_DIR
 if $SWITCH_LATEST_TAG; then
