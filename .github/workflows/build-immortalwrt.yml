@@ -57,9 +57,6 @@ on:
         required: true
         type: choice
         options:
-          - 'openwrt-23.05'
-          - 'openwrt-21.02'
-          - 'openwrt-18.06'
           - 'master'
       latest_tag:
         description: '切换到最近稳定版本(master版本无)'
