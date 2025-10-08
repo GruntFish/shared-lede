@@ -4,7 +4,7 @@
 CODE_DIR=_firmware_code
 #CODE_URL=https://github.com/GruntFish/lede.git
 #CODE_BRANCH=master
-CODE_URL=https://github.com/GruntFish/immortalwrt-mtk-sdk.git
+CODE_URL=https://github.com/GruntFish/immortalwrt-18.06-mtkhnat.git
 CODE_BRANCH=master
 SWITCH_LATEST_TAG=false
 git clone --single-branch -b $CODE_BRANCH $CODE_URL $CODE_DIR
