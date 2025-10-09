@@ -27,6 +27,7 @@ SUPPLY_DIR=_supply_packages
 echo "src-link supply $PWD/$SUPPLY_DIR" >> feeds.conf.default
 mkdir $SUPPLY_DIR && cd $SUPPLY_DIR
 
+git clone https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom ./package/luci-theme-infinityfreedom
 git clone https://github.com/lwb1978/openwrt-gecoosac ./package/openwrt-gecoosac
 git clone https://github.com/zzsj0928/luci-app-pushbot ./package/luci-app-pushbot
 
