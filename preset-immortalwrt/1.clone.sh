@@ -32,7 +32,6 @@ git clone https://github.com/zzsj0928/luci-app-pushbot ./package/luci-app-pushbo
 
 git clone https://github.com/sirpdboy/luci-app-adguardhome ./package/luci-app-adguardhome
 git clone https://github.com/sirpdboy/luci-app-lucky ./package/luci-app-lucky
-git clone https://github.com/sirpdboy/luci-app-netspeedtest ./package/luci-app-netspeedtest
 git clone https://github.com/sirpdboy/luci-app-watchdog ./package/luci-app-watchdog
 
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git pw-dependencies
