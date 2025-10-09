@@ -3,73 +3,85 @@ name: Auto-Clean
 on:
   workflow_dispatch:
     inputs:
-      keep_latest:
+      keep_releases:
         description: '保留最近几个成功的Release'
-        required: false
         default: '5'
+        type: string
+      keep_workflow_runs:
+        description: '保留最近几个工作流运行记录'
+        default: '20'
         type: string
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   cleanup:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
+      # 步骤1: 清理旧的Releases
       - name: Cleanup Old Releases
         uses: actions/github-script@v7
         with:
           script: |
-            try {
-              const keepLatest = parseInt('${{ inputs.keep_latest }}') || 5;
-              console.log(`🚀 开始清理，保留最近 ${keepLatest} 个成功的Release`);
+            const keepReleases = parseInt('${{ inputs.keep_releases }}') || 5;
+            console.log(`🗑️ 开始清理Releases，保留最近 ${keepReleases} 个`);
+            
+            const releases = await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
 
-              // 获取所有release
-              const releases = await github.rest.repos.listReleases({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                per_page: 100
-              });
+            const sortedReleases = releases.data.sort((a, b) => 
+              new Date(b.created_at) - new Date(a.created_at)
+            );
 
-              console.log(`📦 总共找到 ${releases.data.length} 个Release`);
-
-              if (releases.data.length === 0) {
-                console.log('✅ 没有需要清理的Release');
-                return;
+            for (let i = keepReleases; i < sortedReleases.length; i++) {
+              const release = sortedReleases[i];
+              try {
+                console.log(`🗑️ 删除Release: ${release.tag_name}`);
+                await github.rest.repos.deleteRelease({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  release_id: release.id
+                });
+              } catch (error) {
+                console.log(`❌ 删除Release失败: ${release.tag_name}`);
               }
+            }
 
-              // 按创建时间排序
-              const sortedReleases = releases.data.sort((a, b) => 
-                new Date(b.created_at) - new Date(a.created_at)
-              );
+      # 步骤2: 清理工作流运行记录（新增！）
+      - name: Cleanup Workflow Runs
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const keepWorkflowRuns = parseInt('${{ inputs.keep_workflow_runs }}') || 20;
+            console.log(`🗑️ 开始清理工作流记录，保留最近 ${keepWorkflowRuns} 个`);
+            
+            // 获取所有工作流运行记录
+            const workflows = await github.rest.actions.listWorkflowRunsForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100
+            });
 
-              let kept = 0;
-              let deleted = 0;
+            const sortedWorkflows = workflows.data.workflow_runs.sort((a, b) => 
+              new Date(b.created_at) - new Date(a.created_at)
+            );
 
-              for (const release of sortedReleases) {
-                const hasAssets = release.assets && release.assets.length > 0;
-                
-                if (hasAssets && kept < keepLatest) {
-                  console.log(`✅ 保留: ${release.tag_name} (有资源文件)`);
-                  kept++;
-                } else {
-                  try {
-                    console.log(`🗑️ 删除: ${release.tag_name} (${hasAssets ? '旧的成功Release' : '失败的Release'})`);
-                    await github.rest.repos.deleteRelease({
-                      owner: context.repo.owner,
-                      repo: context.repo.repo,
-                      release_id: release.id
-                    });
-                    deleted++;
-                  } catch (error) {
-                    console.log(`❌ 删除失败 ${release.tag_name}: ${error.message}`);
-                  }
-                }
+            // 删除旧的工作流运行记录
+            for (let i = keepWorkflowRuns; i < sortedWorkflows.length; i++) {
+              const run = sortedWorkflows[i];
+              try {
+                console.log(`🗑️ 删除工作流记录: #${run.id} ${run.name} (${run.conclusion})`);
+                await github.rest.actions.deleteWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: run.id
+                });
+              } catch (error) {
+                console.log(`❌ 删除工作流记录失败: #${run.id}`);
               }
-
-              console.log(`🎉 清理完成! 保留: ${kept}个, 删除: ${deleted}个`);
-
-            } catch (error) {
-              console.log('💥 发生错误:', error);
-              core.setFailed(error.message);
             }
