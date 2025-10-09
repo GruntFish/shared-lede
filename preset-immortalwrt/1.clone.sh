@@ -29,7 +29,6 @@ mkdir $SUPPLY_DIR && cd $SUPPLY_DIR
 
 git clone https://github.com/lwb1978/openwrt-gecoosac ./package/openwrt-gecoosac
 git clone https://github.com/sirpdboy/luci-app-adguardhome ./package/luci-app-adguardhome
-git clone https://github.com/zzsj0928/luci-app-pushbot ./package/luci-app-pushbot
 git clone https://github.com/sirpdboy/luci-app-lucky ./package/luci-app-lucky
 
 #git clone --depth 1 https://github.com/xiaorouji/openwrt-passwall-packages.git pw-dependencies
