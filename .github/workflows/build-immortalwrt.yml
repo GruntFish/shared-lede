@@ -147,6 +147,8 @@ jobs:
       - name: Updata & Install feeds
         run: |
           ./scripts/feeds update -a
+          rm -rf feeds/packages/lang/golang
+          git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
           ./scripts/feeds install -a
 
       - name: Modify configuration
