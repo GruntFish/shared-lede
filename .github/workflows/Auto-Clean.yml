@@ -1,4 +1,4 @@
-name: Cleanup Failed Releases Only
+name: Auto-Clean
 
 on:
   workflow_dispatch:
