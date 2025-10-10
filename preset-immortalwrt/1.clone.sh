@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-# 查看根目录主要结构
-ls /
-
-# 查看根目录详细信息
-ls -la /
-
-# 查看磁盘挂载情况
-df -h
-
 # download base code
 CODE_DIR=_firmware_code
 #CODE_URL=https://github.com/GruntFish/lede.git
