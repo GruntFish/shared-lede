@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+pwd
+
+
 # download base code
 CODE_DIR=_firmware_code
 #CODE_URL=https://github.com/GruntFish/lede.git
