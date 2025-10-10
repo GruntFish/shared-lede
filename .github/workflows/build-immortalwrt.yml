@@ -145,10 +145,12 @@ jobs:
           $CLONE_SH
 
       - name: Updata & Install feeds
+        env:
+          DEL_SH: ${{ steps.prepare-deployment.outputs.del_sh }}
         run: |
           ./scripts/feeds update -a
-          rm -rf feeds/packages/lang/golang
-          git clone https://github.com/sbwml/packages_lang_golang -b 25.x feeds/packages/lang/golang
+          chmod +x $DEL_SH
+          $DEL_SH
           ./scripts/feeds install -a
 
       - name: Modify configuration
