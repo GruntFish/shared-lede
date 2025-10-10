@@ -31,7 +31,7 @@ git clone https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom ./packa
 git clone https://github.com/lwb1978/openwrt-gecoosac ./package/openwrt-gecoosac
 git clone https://github.com/zzsj0928/luci-app-pushbot ./package/luci-app-pushbot
 
-git clone https://github.com/sirpdboy/luci-app-adguardhome ./package/luci-app-adguardhome
+git clone https://github.com/GruntFish/OP-Packages ./package/OP-Packages
 git clone https://github.com/sirpdboy/luci-app-lucky ./package/luci-app-lucky
 git clone https://github.com/sirpdboy/luci-app-watchdog ./package/luci-app-watchdog
 
