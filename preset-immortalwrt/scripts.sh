@@ -1,4 +1,8 @@
+ls -la
 
+pwd
+
+ls
 rm -rf ../feeds/packages/net/adguardhome
     
 rm -rf ../feeds/packages/lang/golang
