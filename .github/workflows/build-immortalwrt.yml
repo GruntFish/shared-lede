@@ -144,13 +144,13 @@ jobs:
           chmod +x $CLONE_SH
           $CLONE_SH
 
-      - name: Updata & Install feeds
-        env:
-          DEL_SH: ${{ steps.prepare-deployment.outputs.del_sh }}
+      - name: Updata feeds & del-script & Install feeds
         run: |
           ./scripts/feeds update -a
-          chmod +x $DEL_SH
-          $DEL_SH
+          
+          chmod +x preset-immortalwrt/del.sh
+          ./preset-immortalwrt/del.sh
+          
           ./scripts/feeds install -a
 
       - name: Modify configuration
