@@ -24,3 +24,8 @@ if $SWITCH_LATEST_TAG; then
     cd ..
 fi
 mv ./$CODE_DIR/* ./
+
+cd ./$CODE_DIR
+pwd
+ls
+ls -la
